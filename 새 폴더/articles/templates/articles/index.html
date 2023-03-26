@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Index Page</h1>
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'articles:create' %}">[Create]</a>
+    <hr>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">새 글을 작성하려면 로그인하세요</a>
+  {% endif %}
+  {% for articles in article  %}
+    <p>{{articles.pk}} 번 게시물</p>
+    <a href="{% url 'articles:detail' articles.pk %}">
+      <p>제목 : {{articles.title}}</p>
+    </a>
+    <hr>
+  {% endfor %}
+{% endblock content %}
